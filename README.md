@@ -1,5 +1,7 @@
 # Fancy UI — Claude Code plugin
 
+[![Fancy UI suite](art/fancy-ui.svg)](https://particle.academy)
+
 Installs the **Fancy UI registry MCP** + skills for building with the
 [Fancy UI](https://ui.particle.academy) kit — ~100 React + PHP UI primitives
 engineered for **Human+ UX** (humans and AI agents sharing one UI surface).
