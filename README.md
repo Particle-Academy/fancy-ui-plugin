@@ -24,6 +24,9 @@ and install Fancy UI components conversationally.
 - **Skills**
   - `fancy-ui:components` — find, install, and compose Fancy UI components.
   - `fancy-ui:human-plus` — make a running app agent-inhabitable via MCP bridges.
+  - `fancy-ui:building-apps` — build a full app with the suite (Fancy Core stack, which package to reach for, suite-wide best practices).
+  - `fancy-ui:ssr` — server-side rendering + hydration with Inertia (`FancyClientOnly`, what can't SSR, mismatch gotchas).
+  - `fancy-ui:realtime` — real-time via Laravel Echo + `fancy-query` (broadcast → invalidate → refetch, presence).
 
 ## Why a plugin instead of a raw `.mcp.json`?
 

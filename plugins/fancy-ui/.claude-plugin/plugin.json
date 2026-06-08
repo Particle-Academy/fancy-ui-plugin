@@ -1,7 +1,7 @@
 {
   "name": "fancy-ui",
   "displayName": "Fancy UI",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Browse, search, and install Fancy UI components conversationally, and build Human+ UX apps where agents share the UI. Bundles the hosted registry MCP + skills.",
   "author": {
     "name": "Particle Academy",

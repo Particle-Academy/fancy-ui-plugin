@@ -1,0 +1,53 @@
+---
+name: ssr
+description: Use when server-side rendering a Fancy UI + Inertia app, fixing hydration mismatches, getting real content on the first byte, or deciding what can/can't render on the server. Triggers on "SSR", "server-side rendering", "Inertia SSR", "hydration mismatch", "FancyClientOnly", "window is not defined", "first paint / flash", "renderToString".
+---
+
+# SSR + hydration with Fancy UI
+
+Fancy UI apps should render real content on the **first byte** — for crawlers, social/LLM scrapers, perceived speed, and a stable first paint — then hydrate to interactive. `@particle-academy/fancy-inertia` is built for this.
+
+## The setup (Laravel + Inertia + Vite)
+
+Two entries share `FancyAppRoot`:
+
+```tsx
+// resources/js/app.tsx — client
+import { FancyAppRoot } from "@particle-academy/fancy-inertia";
+createInertiaApp({ /* … */, setup: ({ el, App, props }) => FancyAppRoot.hydrate(el, App, props) });
+
+// resources/js/ssr.tsx — server (Node)
+import ReactDOMServer from "react-dom/server";
+createInertiaApp({ page, render: ReactDOMServer.renderToString, /* … */ });
+```
+
+Build the SSR bundle (`vite build --ssr`) and run the Node SSR server (`php artisan inertia:start-ssr`). The Blade root still emits server-rendered SEO/meta on full loads — Inertia XHR visits return JSON, so bots get real HTML.
+
+## The core rule: not everything can SSR
+
+Anything that touches `window`, `document`, `ResizeObserver`, canvas/WebGL, or measures layout **cannot run on the server**. Wrap those in the SSR boundary instead of guarding by hand:
+
+```tsx
+import { FancyClientOnly } from "@particle-academy/fancy-inertia";
+
+<FancyClientOnly fallback={<Skeleton />}>
+  <Whiteboard … />   {/* canvas — client only; renders fallback on the server */}
+</FancyClientOnly>
+```
+
+`FancyClientOnly` renders the fallback during SSR + the first hydration pass, then swaps in the real children — so the server HTML and the first client render **match**, avoiding hydration mismatches.
+
+Good candidates to wrap: `fancy-whiteboard`, `fancy-artboard`, `fancy-3d*`, `fancy-flow`, anything from `fancy-motion`, and charts that measure their container.
+
+## Gotchas (learned the hard way)
+
+- **Measure on a passive effect, not `requestAnimationFrame`.** Floating/anchored positioning must measure in a `useEffect` after mount — rAF races the late hydration mount and is throttled in hidden tabs, so the element lands at `0,0` or never positions. (This is why react-fancy's `useFloatingPosition` measures on a passive effect.)
+- **No `Date.now()` / `Math.random()` in render** — they differ between server and client → hydration mismatch. Compute them in an effect or pass them as props.
+- **Read `window`/`localStorage` in effects only**, never in the render body or module top-level (the SSR bundle has no `window`).
+- **Tailwind v4 cascade:** unlayered CSS beats `@layer utilities`. A server-rendered global like `section { padding: 96px 0 }` will override a `p-5` utility — scope globals or use a non-semantic element.
+- **Hidden/offscreen tabs throttle rAF + CSS animations.** Don't rely on animation/rAF completion for correctness; drive state from effects/events.
+
+## Verify it actually rendered
+Curl the page (not the browser) and confirm the real content is in the HTML, not just a `<div id="app">` shell. For visual correctness, capture the live URL with a headless screenshot and look at it — DOM presence ≠ correct layout.
+
+For the data layer that pairs with SSR (hydrate the query cache from Inertia props so SSR'd data isn't refetched), see the `realtime` skill's `useInertiaHydration` note and the `building-apps` skill.
