@@ -1,6 +1,6 @@
 ---
 name: realtime
-description: Use when adding real-time / live updates to a Fancy UI + Laravel app — Laravel Echo / broadcasting (Reverb, Pusher), live cache invalidation, presence, or syncing server state across clients and agents. Triggers on "Echo", "broadcasting", "real-time", "live updates", "websocket", "Reverb", "Pusher", "presence channel", "invalidate on event", "fancy-query".
+description: Use when adding real-time / live updates to a Fancy UI + Laravel app — Laravel Echo / broadcasting (Reverb, Pusher), live cache invalidation, presence, or syncing server state across clients and agents. Triggers on "Echo", "broadcasting", "real-time", "live updates", "websocket", "Reverb", "Pusher", "presence channel", "invalidate on event", "fancy-query", "streaming chat", "useFancyStream".
 ---
 
 # Real-time with Echo + fancy-query
@@ -38,6 +38,30 @@ function Board({ boardId }) {
 
 `useEchoClient()` exposes the raw Echo client if you need presence channels or whisper/typing events directly.
 
+## Streaming — patch the cache instead of invalidating
+
+Invalidate-and-refetch is right for **list** surfaces. For **chat / agentic / token-stream** surfaces it's the wrong tool: a refetch drops optimistic + in-flight state and flickers. `useFancyStream` maps Echo events onto `setQueryData` **reducers** so the cache is patched in place:
+
+```tsx
+import { FancyDataRoot, useFancyStream } from "@particle-academy/fancy-query";
+
+const { data: messages, isStreaming, append } = useFancyStream(["chat", chatId], {
+  channel: `private-chat.${chatId}`,
+  fetchInitial: () => api.get(`/api/chat/${chatId}/history`),
+  on: {
+    "post.created":     (cache, e) => [...(cache ?? []), e.post],   // append
+    "post.delta":       (cache, e) => patchLast(cache, e.delta),    // token-stream
+    "stream.completed": (cache, e) => reconcile(cache, e),          // settle
+  },
+  poll: { while: "streaming", intervalMs: 4000 },                   // missed-broadcast recovery
+});
+
+// Optimistically show the user's own message before the server echoes it back:
+const send = (text) => { append({ id: tempId(), text, pending: true }); api.post(/* … */); };
+```
+
+`isStreaming` flips on the start/end events (default `stream.started` / `stream.completed`). Same channel-prefix rules + `FancyDataRoot` wiring as `useFancyEchoInvalidation`; the consumer still owns the Echo connection. Reach for this when a refetch would clobber state you're mid-way through — otherwise prefer invalidation below.
+
 ## Wiring (server — Laravel)
 
 1. Run a broadcaster — **Reverb** (first-party, self-hosted) or Pusher. Set `BROADCAST_CONNECTION`.
@@ -51,7 +75,7 @@ function Board({ boardId }) {
 
 ## Best practices
 
-- **Invalidate, don't patch.** Echo events should trigger a refetch, not mutate the cache by hand — the server stays authoritative and you avoid drift.
+- **Invalidate for lists; patch for streams.** Default to invalidate-and-refetch — the server stays authoritative and you avoid drift. Reach for `useFancyStream`'s in-place reducers only on streaming/chat surfaces where a refetch would drop optimistic + in-flight state.
 - **Scope channels tightly** (`board.{id}`, not a firehose) so a client only wakes for relevant changes.
 - **Optimistic UI** via `useFancyMutation` for the actor; the Echo invalidation reconciles everyone (including the actor) to server truth.
 - **Pair with SSR:** `useInertiaHydration` means the first render uses server data; Echo keeps it live after. See the `ssr` skill.
