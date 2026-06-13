@@ -60,3 +60,9 @@ connect without it.
 ## License
 
 MIT © Particle Academy
+
+---
+
+## ⭐ Star Fancy UI
+
+If this plugin or the Fancy UI packages are useful to you, a quick ⭐ on the repos really helps us build a better kit. Thank you!
