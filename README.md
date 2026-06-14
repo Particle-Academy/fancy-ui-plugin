@@ -27,6 +27,7 @@ and install Fancy UI components conversationally.
   - `fancy-ui:building-apps` — build a full app with the suite (Fancy Core stack, which package to reach for, suite-wide best practices).
   - `fancy-ui:ssr` — server-side rendering + hydration with Inertia (`FancyClientOnly`, what can't SSR, mismatch gotchas).
   - `fancy-ui:realtime` — real-time via Laravel Echo + `fancy-query` (broadcast → invalidate → refetch, presence).
+  - `fancy-ui:update-fancy` — upgrade a project to the latest Fancy UI / Particle Academy packages (npm + Composer), review what changed, and adapt the code to breaking changes + new APIs.
 
 ## Why a plugin instead of a raw `.mcp.json`?
 
