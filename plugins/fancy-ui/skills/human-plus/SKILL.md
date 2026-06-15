@@ -1,6 +1,6 @@
 ---
 name: human-plus
-description: Use when building an application where humans AND AI agents share the same UI and trade control — making a Fancy UI surface agent-inhabitable via MCP bridges (agent-integrations), wiring registerWhiteboardBridge / registerFlowBridge / registerSheetsBridge / registerSlidesBridge / etc., adding presence, or satisfying the Human+ UX component contract.
+description: Use when making a Fancy UI surface agent-driveable — building an app where humans AND AI agents share the same UI and trade control over MCP bridges (agent-integrations), wiring registerWhiteboardBridge / registerFlowBridge / registerSheetsBridge / registerSlidesBridge / registerFormBridge / etc., adding agent presence + cursors, satisfying the Human+ UX component contract (controlled state, stable handles, bridgeable surface), or generating per-client install affordances with ConnectorButtons / writeMcpbBundle. Triggers on "let an agent drive/control the UI", "agent shares the UI", "MCP bridge", "agent presence", "human plus", "human+ ux", "agent-integrations", "add to claude / cursor button", ".mcpb bundle".
 ---
 
 # Human+ UX: make the app agent-inhabitable

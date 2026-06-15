@@ -1,6 +1,6 @@
 ---
 name: ssr
-description: Use when server-side rendering a Fancy UI + Inertia app, fixing hydration mismatches, getting real content on the first byte, or deciding what can/can't render on the server. Triggers on "SSR", "server-side rendering", "Inertia SSR", "hydration mismatch", "FancyClientOnly", "window is not defined", "first paint / flash", "renderToString".
+description: Use when server-side rendering a Fancy UI + Inertia app or fixing SSR problems — getting real HTML on the first byte, wiring createFancyServer / setupFancyApp / hydrateRoot + the SSR node process, fixing hydration mismatches (React #418), and deciding what can/can't render on the server (FancyClientOnly). This is the RENDERING mechanic; for meta tags / Open Graph / sitemaps / structured data see the `seo` skill. Triggers on "SSR", "server-side rendering", "Inertia SSR", "hydration mismatch", "FancyClientOnly", "window/document is not defined", "first paint / flash of empty content", "renderToString", "hydrateRoot".
 ---
 
 # SSR + hydration with Fancy UI

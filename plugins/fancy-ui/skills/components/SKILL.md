@@ -1,6 +1,6 @@
 ---
 name: components
-description: Use when finding, choosing, installing, or composing Fancy UI components — React + Tailwind v4 primitives and PHP packages. Triggers when the user wants a UI primitive (calendar, data grid, modal, kanban, whiteboard, chart, spreadsheet, slides, code editor, form, etc.) or asks to add/install a Fancy UI component. Drives the hosted fancy-ui registry MCP.
+description: Use when finding, choosing, installing, or composing individual Fancy UI components — React + Tailwind v4 primitives and PHP packages (calendar, data grid, modal, kanban, whiteboard, chart, spreadsheet, slides, code editor, terminal, form, diff, carousel, command palette, etc.). The hosted fancy-ui registry MCP (list / search / install-instructions / get-component) is the source of truth for component names, install commands, and docs — use it, never guess slugs or browse the GitHub repos. Triggers on "add/install a fancy component", "is there a fancy ui <thing>", "which fancy component for <UI concept>", "fancy-ui add", "vendor the source", "what components does fancy ui have".
 ---
 
 # Building with Fancy UI components
