@@ -10,7 +10,7 @@
       "name": "fancy-ui",
       "source": "./plugins/fancy-ui",
       "description": "Registry MCP + skills for finding, installing, and building with the Fancy UI kit.",
-      "version": "0.4.0",
+      "version": "0.4.1",
       "homepage": "https://ui.particle.academy",
       "repository": "https://github.com/Particle-Academy/fancy-ui-plugin",
       "license": "MIT",

@@ -13,6 +13,32 @@ consumer-side upgrade of *their* app, not a release of the kit.
 Work methodically; don't blind-bump and hope. The value is in the review +
 adaptation, not just the version numbers.
 
+## Source of truth: the fancy-ui registry MCP
+
+**Discover and learn about every Fancy package through the registry MCP first** —
+it's the authoritative index of what exists, what each component/package is, the
+exact install commands, and a docs link per item. Use its tools (see the
+`components` skill) for all discovery + info:
+
+- *list* / *search* — enumerate the Fancy packages + components and confirm
+  canonical names (never guess slugs or package names).
+- *install-instructions* — the exact `npm install @particle-academy/<pkg>` /
+  `composer require` / `npx fancy-ui add` commands **and a `docs` URL**
+  (`https://ui.particle.academy/packages/<pkg>/<component>`) for that item.
+- *get-component* — full source when you need to read the actual implementation.
+
+For the package **info / docs / what's new**, read the registry's `docs` links
+(or the docs MCP if connected) — not the GitHub repos. For the resolved **version
+numbers**, npm / Packagist are the source (the registry's install commands pull
+`@latest`; confirm with `npm view` / `composer show`).
+
+> Only drop to a GitHub repo directly (CHANGELOG / Releases) if the registry MCP
+> and its docs links don't answer the question.
+
+If the registry MCP isn't connected, tell the user to enable the plugin
+(`/plugin install fancy-ui@fancy-ui`) and approve the `fancy-ui` MCP server —
+don't substitute repo browsing for it.
+
 ## 0. Safety first
 - Make sure the working tree is clean (or on a fresh branch) so the upgrade is
   reviewable as one diff. If it's dirty, ask before proceeding.
@@ -25,40 +51,42 @@ adaptation, not just the version numbers.
   `node-pty`, `@xterm/*`, etc.).
 - **Composer:** every `particle-academy/*` in `composer.json` `require` /
   `require-dev`.
-- List them back to the user with current → available versions before bumping.
+- Cross-check against the registry MCP *list* so you have the canonical package
+  names + their docs links to hand. List the deps back to the user with
+  current → latest versions before bumping.
 
 ## 2. Bump to the latest releases
-Plain `npm update` / `composer update` only move **within the existing semver
-range** — they won't cross a major. To get the genuinely latest:
+Get the install commands from the registry MCP (*install-instructions*), then run
+them. Plain `npm update` / `composer update` only move **within the existing
+semver range** — they won't cross a major, so to get the genuinely latest:
 
-- **npm (cross-major):**
-  ```bash
-  npx npm-check-updates -u --filter "@particle-academy/*"   # rewrites package.json ranges
-  npm install
-  ```
-  Or per package: `npm install @particle-academy/<pkg>@latest`. Keep peers in
-  sync (e.g. bump `react`/`@xterm/*` if a package now needs a newer peer).
-- **Composer (cross-major):** bump the constraint then update with deps:
-  ```bash
-  composer require particle-academy/<pkg>:^X.Y -W      # per package, or
-  composer update "particle-academy/*" -W
-  ```
-- Confirm the live latest with the **fancy-ui registry MCP** (`list` /
-  `search` / `get-install-instructions`) rather than guessing — see the
-  `components` skill. `npm view @particle-academy/<pkg> version` /
-  `composer show particle-academy/<pkg> -a` also work.
+- **npm (cross-major):** `npm install @particle-academy/<pkg>@latest` per
+  package, or `npx npm-check-updates -u --filter "@particle-academy/*" && npm
+  install` to rewrite ranges in bulk. Keep peers in sync (bump `react` /
+  `@xterm/*` if a package now needs a newer peer).
+- **Composer (cross-major):** `composer require particle-academy/<pkg>:^X.Y -W`
+  per package, or `composer update "particle-academy/*" -W`.
+- The **resolved version numbers** come from npm / Packagist — confirm with
+  `npm view @particle-academy/<pkg> version` / `composer show
+  particle-academy/<pkg> -a`. (These query the registries, not the GitHub repos.)
 
 ## 3. Review what changed — per package
-For each package that moved a minor or major, find the real delta:
-- Read its **CHANGELOG** / GitHub **Releases**
-  (`github.com/Particle-Academy/<repo>/releases`) and the updated README in
-  `node_modules/@particle-academy/<pkg>` (Fancy packages ship `docs/` in the
-  tarball). `gh release list`/`gh release view` if `gh` is available.
+For each package that moved a minor or major, find the real delta **via the
+registry MCP docs**, not the repos:
+- Open the package/component **docs link** the registry's *install-instructions*
+  returns (`https://ui.particle.academy/packages/<pkg>`), or query the docs MCP
+  if it's connected. The installed package's own bundled `docs/` + README (in
+  `node_modules/@particle-academy/<pkg>`) are fine too — that's the published
+  artifact, not the repo.
 - Flag **breaking changes** (renamed/removed props, changed defaults, moved
   exports, new required peers, deprecations) and **new capabilities** (new
-  components, hooks, props) worth adopting.
+  components, hooks, props) worth adopting. Use *get-component* to read the
+  actual source when the docs are ambiguous.
 - Summarize per package as: `pkg  vOLD → vNEW — breaking: … / new: …`. Surface
   this to the user before editing code.
+
+> Only if the registry MCP + its docs links don't cover it, fall back to the
+> repo's CHANGELOG / GitHub Releases (`gh release view`) as a last resort.
 
 ## 4. Update the project as needed
 - **Fix breakage first:** apply the renames/signature changes the changelog
