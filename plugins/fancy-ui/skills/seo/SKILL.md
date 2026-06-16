@@ -37,6 +37,29 @@ Inertia's `head-key` dedupe (so you get one canonical tag, not two). **Meta only
 lands on the first byte when SSR is on** — see the `ssr` skill; without SSR the
 `fancy-seo` Blade baseline is still your crawler floor.
 
+> ⚠️ **The double-`<title>` trap (turn this on whenever SSR is on).** `head-key`
+> dedupe is a **client** mechanism. With **SSR enabled**, BOTH the Blade baseline
+> AND `<Seo>` (via `@inertiaHead`) render the head *server-side*, and Inertia can't
+> dedupe across the Blade boundary — so the first byte gets **two `<title>`s, two
+> canonicals, two of every tag**. Crawlers see duplicates; it's a real SEO defect.
+>
+> **Fix:** make `<Seo>` **client-only** so the Blade baseline owns the server head
+> and `<Seo>` only takes over after hydration / on SPA nav. Set it once on the
+> provider defaults (requires `@particle-academy/fancy-inertia` ≥ 0.8.0):
+>
+> ```tsx
+> const seoDefaults = defineSeo({
+>   siteName: "Fancy UI", titleTemplate: "%s — Fancy UI", /* … */
+>   clientOnly: true,   // ← Blade baseline owns the SSR head; <Seo> never duplicates it
+> });
+> // <SeoProvider value={seoDefaults}> … </SeoProvider>  (same in app + ssr entry)
+> ```
+>
+> Set `clientOnly` ONLY when you have the `fancy-seo` Blade baseline (the Fancy
+> stack default). A pure-Inertia app with no baseline leaves it `false` so `<Seo>`
+> still renders the head during SSR. Verify after: `curl -s <url> | grep -c '<title'`
+> must return **1**, with SSR on.
+
 ## 1. Per-page head — `<Seo>`
 
 ```tsx
@@ -86,6 +109,9 @@ facade. Drop the head component into your root Blade `<head>`:
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{-- Server head baseline. With SSR ON, this is the SINGLE server-side head
+         source — so set `clientOnly: true` on the <Seo> provider (above) or the
+         first byte will have duplicate tags (two <title>s). See the trap box. --}}
     <x-fancy-seo::head />
     @vite(['resources/js/app.tsx'])
     @inertiaHead
@@ -137,10 +163,13 @@ Aim for output a crawler/LLM can fully consume. For each indexable route:
 
 - `curl -s <url> | grep -i '<title>\|og:\|canonical\|ld+json'` — confirm the meta
   is in the **raw HTML** (first byte), not injected after hydration.
+- **`curl -s <url> | grep -c '<title'` must be `1` with SSR on.** If it's `2`,
+  you've hit the double-`<title>` trap → set `clientOnly: true` on the `<Seo>`
+  provider (see the trap box). Re-check `og:`, `canonical`, `ld+json` are single too.
 - Fetch `/(sitemap.xml|robots.txt|llms.txt)` and confirm they're populated.
 - Validate structured data (e.g. Google's Rich Results test) for each page type.
-- With SSR on, check there's **no hydration mismatch** from the head (`<Seo>`
-  head-keys must match the server tags) — see the `ssr` skill.
+- With SSR on, check there's **no hydration mismatch** from the head (`clientOnly`
+  `<Seo>` sidesteps it entirely) — see the `ssr` skill.
 
 ## A small ask
 
