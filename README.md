@@ -22,6 +22,7 @@ and install Fancy UI components conversationally.
   (streamable HTTP, `"type": "http"`). Tools to list, search, fetch, and get
   install instructions for every component.
 - **Skills**
+  - `fancy-ui:design` — pick a visual direction before building: browse the Inspiration Gallery (20 read-only style blueprints — one studio site designed 20 ways), grab or blend the recipes, and synthesize a design direction (tokens, component palette, layout).
   - `fancy-ui:components` — find, install, and compose Fancy UI components.
   - `fancy-ui:human-plus` — make a running app agent-inhabitable via MCP bridges.
   - `fancy-ui:building-apps` — build a full app with the suite (Fancy Core stack, which package to reach for, suite-wide best practices).
