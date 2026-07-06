@@ -33,7 +33,7 @@ Use the registry MCP (`list` / `search` / `get-install-instructions`) to confirm
 
 1. **Controlled state, always.** Every stateful component takes `value` + `onChange`. Own the state in the host — never rely on internal-only state an agent or a server round-trip might need to touch. This is the Human+ contract (see `human-plus`).
 2. **JSON-friendly props.** Arrays of objects, primitives, discriminated unions — so humans *and* agents can author them. Avoid forcing React children for data the agent must populate.
-3. **Server state vs. UI state.** Put server-derived data behind `fancy-query` (cache, refetch, real-time invalidation). Keep ephemeral UI state local. Don't refetch what Inertia already shipped — hydrate it (`useInertiaHydration`).
+3. **Server state vs. UI state.** Put server-derived data behind `fancy-query` (cache, refetch, real-time invalidation). Keep ephemeral UI state local. Don't refetch what Inertia already shipped — hydrate it (`useInertiaHydration`, from `@particle-academy/fancy-query/inertia` since 0.5.0).
 4. **SSR-first.** Render real content on the first byte; guard anything that touches `window`/measurement with `FancyClientOnly`. See the `ssr` skill.
 5. **Real-time as invalidation.** Wire Laravel Echo to query invalidation rather than hand-rolling socket state. See the `realtime` skill.
 6. **Tailwind v4 (CSS-first `@theme`), React 19.** Watch the cascade: unlayered CSS beats `@layer utilities`, so a stray `section { padding }` overrides `p-5`.

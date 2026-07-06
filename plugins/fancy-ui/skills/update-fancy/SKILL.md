@@ -23,7 +23,7 @@ exact install commands, and a docs link per item. Use its tools (see the
 - *list* / *search* — enumerate the Fancy packages + components and confirm
   canonical names (never guess slugs or package names).
 - *install-instructions* — the exact `npm install @particle-academy/<pkg>` /
-  `composer require` / `npx fancy-ui add` commands **and a `docs` URL**
+  `composer require` / `npx fancy-cli add` commands **and a `docs` URL**
   (`https://ui.particle.academy/packages/<pkg>/<component>`) for that item.
 - *get-component* — full source when you need to read the actual implementation.
 

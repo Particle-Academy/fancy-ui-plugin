@@ -11,9 +11,12 @@ The Fancy way to do real-time is **broadcast → invalidate → refetch**, not h
 
 ```tsx
 import {
-  FancyDataRoot, useInertiaHydration,
+  FancyDataRoot,
   useFancyQuery, useFancyEchoInvalidation,
 } from "@particle-academy/fancy-query";
+// Inertia-only hook — own subpath (since fancy-query 0.5.0) so non-Inertia
+// apps never touch the optional @inertiajs/react peer.
+import { useInertiaHydration } from "@particle-academy/fancy-query/inertia";
 
 // 1. Provide the QueryClient + Echo client once near the root.
 <FancyDataRoot echo={echo}>…</FancyDataRoot>

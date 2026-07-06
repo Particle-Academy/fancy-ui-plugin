@@ -12,7 +12,7 @@ This plugin connects the **fancy-ui registry MCP** (`https://ui.particle.academy
 1. **List / search.** When the user names a UI concept ("calendar", "data grid", "modal", "spreadsheet", "slides"), call the registry's *list* or *search* tool to find matching components. Never invent slugs — confirm against the live registry.
 2. **Install.** Call the registry's *install-instructions* tool for the chosen component. It returns BOTH paths:
    - `npm install @particle-academy/<package>` — the default; import from the published package.
-   - `npx fancy-ui add <slug>` — vendor the source into the repo, shadcn-style.
+   - `npx fancy-cli add <slug>` — vendor the source into the repo, shadcn-style.
    Prefer npm unless the user wants the source vendored in.
 3. **Source.** If you need the actual component source (to inline into an answer or write files directly), call the registry's *get-component* tool for the full bundle.
 
