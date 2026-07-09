@@ -1,0 +1,20 @@
+{
+  "name": "fancy-ui",
+  "interface": {
+    "displayName": "Fancy UI"
+  },
+  "plugins": [
+    {
+      "name": "fancy-ui",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fancy-ui"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}

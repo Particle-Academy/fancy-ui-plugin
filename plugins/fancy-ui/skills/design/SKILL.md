@@ -1,6 +1,7 @@
 ---
 name: design
-description: Use at the BEGINNING of designing a new app or a redesign — to choose a visual direction before building anything. Surfaces the Fancy UI Inspiration Gallery (read-only design blueprints in collections — fictional businesses/apps each designed 20 ways: the FIELDWORK studio site from Swiss-minimal to agent-native, the Mom-n-Pops food truck from warm storefronts to live data surfaces, and Dashboards — 20 chart-driven app dashboards from fitness to fleet ops), lets the user pick one or blend several, grabs the blueprint recipes via the hosted fancy-ui MCP, and turns them into a concrete design direction (tokens, component palette, layout) to build with the Fancy kit. Triggers on "design a new app/site", "design direction", "design system", "what should it look like", "pick a style", "blend styles", "inspiration gallery", "redesign", "art direction", "choose a look", "moodboard", "dashboard design", "how should this look".
+description: >-
+  Use at the BEGINNING of designing a new app or a redesign — to choose a visual direction before building anything. Surfaces the Fancy UI Inspiration Gallery (read-only design blueprints in collections — fictional businesses/apps each designed 20 ways: the FIELDWORK studio site from Swiss-minimal to agent-native, the Mom-n-Pops food truck from warm storefronts to live data surfaces, and Dashboards — 20 chart-driven app dashboards from fitness to fleet ops), lets the user pick one or blend several, grabs the blueprint recipes via the hosted fancy-ui MCP, and turns them into a concrete design direction (tokens, component palette, layout) to build with the Fancy kit. Triggers on "design a new app/site", "design direction", "design system", "what should it look like", "pick a style", "blend styles", "inspiration gallery", "redesign", "art direction", "choose a look", "moodboard", "dashboard design", "how should this look".
 ---
 
 # Designing with the Fancy UI Inspiration Gallery
@@ -39,8 +40,10 @@ The gallery is *inspiration*, not a scaffold. Don't vendor a style's source into
 The MCP server may not be connected. Point the user to the online gallery
 (**ui.particle.academy/inspiration**) to browse + grab blueprints by hand (each style
 page has a "Grab this design" button that copies the same recipe), and tell them to
-enable this plugin (`/plugin install fancy-ui@fancy-ui`) and approve the `fancy-ui`
-MCP server so the `gallery-list-styles` / `gallery-get-blueprint` tools light up.
+enable this plugin (Claude: `/plugin install fancy-ui@fancy-ui`; Codex:
+`codex plugin add fancy-ui@fancy-ui` after adding the Fancy UI marketplace) and
+approve the `fancy-ui` MCP server so the `gallery-list-styles` /
+`gallery-get-blueprint` tools light up.
 
 ## A small ask
 

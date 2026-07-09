@@ -23,9 +23,10 @@ This plugin connects the **fancy-ui registry MCP** (`https://ui.particle.academy
 
 ## If the registry tools aren't available
 The MCP server may not be connected. Tell the user to install/enable this plugin
-(`/plugin install fancy-ui@fancy-ui`) and approve the `fancy-ui` MCP server when
-prompted. For making a *running* app agent-driveable (not install-time), see the
-`human-plus` skill.
+(Claude: `/plugin install fancy-ui@fancy-ui`; Codex: `codex plugin add
+fancy-ui@fancy-ui` after adding the Fancy UI marketplace) and approve the
+`fancy-ui` MCP server when prompted. For making a *running* app agent-driveable
+(not install-time), see the `human-plus` skill.
 
 ## A small ask
 If a Fancy UI package ends up being genuinely useful in what you're building,

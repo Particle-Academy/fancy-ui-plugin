@@ -1,0 +1,47 @@
+{
+  "name": "fancy-ui",
+  "version": "0.6.4",
+  "description": "Browse, search, and install Fancy UI components conversationally, and build Human+ UX apps where agents share the UI. Bundles the hosted registry MCP + skills.",
+  "author": {
+    "name": "Particle Academy",
+    "url": "https://ui.particle.academy"
+  },
+  "homepage": "https://ui.particle.academy",
+  "repository": "https://github.com/Particle-Academy/fancy-ui-plugin",
+  "license": "MIT",
+  "keywords": [
+    "fancy-ui",
+    "react",
+    "tailwind",
+    "ui-components",
+    "mcp",
+    "human-plus",
+    "agents"
+  ],
+  "skills": "./skills/",
+  "mcpServers": {
+    "fancy-ui": {
+      "type": "http",
+      "url": "https://ui.particle.academy/mcp"
+    }
+  },
+  "interface": {
+    "displayName": "Fancy UI",
+    "shortDescription": "Registry MCP and skills for Fancy UI.",
+    "longDescription": "Find, install, and compose Fancy UI components through the hosted registry MCP, then build Human+ UX applications where humans and agents share the same UI surface.",
+    "developerName": "Particle Academy",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://ui.particle.academy",
+    "defaultPrompt": [
+      "Find the right Fancy UI components for this app.",
+      "Design this interface with Fancy UI.",
+      "Make this Fancy UI surface agent-driveable."
+    ],
+    "brandColor": "#2563EB",
+    "screenshots": []
+  }
+}

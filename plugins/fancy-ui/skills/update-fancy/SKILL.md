@@ -36,8 +36,9 @@ numbers**, npm / Packagist are the source (the registry's install commands pull
 > and its docs links don't answer the question.
 
 If the registry MCP isn't connected, tell the user to enable the plugin
-(`/plugin install fancy-ui@fancy-ui`) and approve the `fancy-ui` MCP server —
-don't substitute repo browsing for it.
+(Claude: `/plugin install fancy-ui@fancy-ui`; Codex: `codex plugin add
+fancy-ui@fancy-ui` after adding the Fancy UI marketplace) and approve the
+`fancy-ui` MCP server — don't substitute repo browsing for it.
 
 ## 0. Safety first
 - Make sure the working tree is clean (or on a fresh branch) so the upgrade is

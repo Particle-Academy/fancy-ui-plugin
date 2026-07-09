@@ -1,4 +1,4 @@
-# Fancy UI — Claude Code plugin
+# Fancy UI — Claude Code and Codex plugin
 
 [![Fancy UI suite](art/fancy-ui.svg)](https://particle.academy)
 
@@ -6,7 +6,7 @@ Installs the **Fancy UI registry MCP** + skills for building with the
 [Fancy UI](https://ui.particle.academy) kit — ~100 React + PHP UI primitives
 engineered for **Human+ UX** (humans and AI agents sharing one UI surface).
 
-## Install
+## Install in Claude Code
 
 ```text
 /plugin marketplace add Particle-Academy/fancy-ui-plugin
@@ -14,6 +14,18 @@ engineered for **Human+ UX** (humans and AI agents sharing one UI surface).
 ```
 
 Approve the `fancy-ui` MCP server when prompted. Claude can now browse, search,
+and install Fancy UI components conversationally.
+
+## Install in Codex
+
+From a local checkout:
+
+```bash
+codex plugin marketplace add .
+codex plugin add fancy-ui@fancy-ui
+```
+
+Approve the `fancy-ui` MCP server when prompted. Codex can now browse, search,
 and install Fancy UI components conversationally.
 
 ## What you get
