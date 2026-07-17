@@ -37,6 +37,7 @@ and install Fancy UI components conversationally.
   - `fancy-ui:design` — pick a visual direction before building: browse the Inspiration Gallery (60 read-only blueprints in collections — fictional businesses/apps each designed 20 ways: the FIELDWORK studio site, the Mom-n-Pops food truck, and chart-driven Dashboards), grab or blend the recipes, and synthesize a design direction (tokens, component palette, layout).
   - `fancy-ui:components` — find, install, and compose Fancy UI components.
   - `fancy-ui:human-plus` — make a running app agent-inhabitable via MCP bridges.
+  - `fancy-ui:tui` — build Ink terminal apps with Fancy TUI, scrollback-safe agent conversations, controlled terminal inputs, and push + inbox MCP workflows.
   - `fancy-ui:building-apps` — build a full app with the suite (Fancy Core stack, which package to reach for, suite-wide best practices).
   - `fancy-ui:ssr` — server-side rendering + hydration with Inertia (`FancyClientOnly`, what can't SSR, mismatch gotchas).
   - `fancy-ui:seo` — crawlable / shareable / LLM-legible output: `<Seo>` + JSON-LD, the `fancy-seo` server baseline, sitemap / robots / llms.txt.

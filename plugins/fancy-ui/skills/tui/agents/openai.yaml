@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fancy TUI"
+  short_description: "Build Human+ terminal apps with Fancy TUI"
+  default_prompt: "Use Fancy TUI to build or improve this Ink terminal application with controlled state, stable handles, and Human+ MCP workflows."
