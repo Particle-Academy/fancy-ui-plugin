@@ -5,7 +5,7 @@ description: Use when building or scaffolding a whole application with Fancy UI 
 
 # Building a complete app with Fancy UI
 
-Fancy UI is a *suite*, not a widget grab-bag. Used to its fullest, it gives you a whole app: the chrome, the data layer, real-time, agent inhabitation, and ~100 primitives. This skill is the map.
+Fancy UI is an *ecosystem*, not a widget grab-bag — 64 packages (47 TypeScript, 16 PHP, 1 polyglot) and 245 installable components. Used to its fullest it gives you a whole app: the chrome, the data layer, real-time, the server capabilities (commerce, feature gating, documents, analytics), and agent inhabitation. This skill is the map.
 
 ## Fancy Core — the minimal stack for a real app
 

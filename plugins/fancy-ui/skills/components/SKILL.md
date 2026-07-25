@@ -5,7 +5,7 @@ description: Use when finding, choosing, installing, or composing individual Fan
 
 # Building with Fancy UI components
 
-Fancy UI is a suite of ~100 React + PHP UI primitives across ~15 packages, engineered for **Human+ UX** — every component is both an *authoring surface* (terse, JSON-friendly props) and an *inhabited surface* (agents drive it over MCP, never DOM scraping).
+Fancy UI is an ecosystem of agent-friendly packages — 245 installable registry components across 64 packages (47 TypeScript, 16 PHP, 1 polyglot), spanning React primitives, interactive surfaces, headless engines, and server capabilities. Most server capabilities ship as a matched PHP + Node pair. **Human+ UX** is a headline capability of the interactive surfaces: each is both an *authoring surface* (terse, JSON-friendly props) and an *inhabited surface* (agents drive it over MCP, never DOM scraping).
 
 This plugin connects the **fancy-ui registry MCP** (`https://ui.particle.academy/mcp`). Use its tools instead of guessing component names or install commands:
 
