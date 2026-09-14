@@ -1,6 +1,6 @@
 # Fancy UI — Claude Code plugin
 
-[![Fancy UI suite](art/fancy-ui.svg)](https://particle.academy)
+[![Fancified](art/fancified.svg)](https://particle.academy)
 
 Installs the **Fancy UI registry MCP** + skills for building with the
 [Fancy UI](https://ui.particle.academy) kit — an ecosystem of agent-friendly
