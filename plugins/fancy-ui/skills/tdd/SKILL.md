@@ -136,6 +136,15 @@ A green tick is only worth something if the check could have gone red.
   `assertNoJavaScriptErrors()`, `assertNoAccessibilityIssues()` or a
   console-error spy, plant one real problem (a `console.error`, an unlabelled
   input), watch the test go red, then remove it.
+- **The Pest browser plugin does not see `console.error` or `console.warn`.**
+  As of v5.2.0 it records only `console.log` (for `assertNoConsoleLogs()`) and
+  uncaught errors and rejections (for `assertNoJavaScriptErrors()`), so a page
+  full of warnings passes both. Until it does, forward them yourself from a
+  script that renders only under tests, first in `app.blade.php`
+  (`@if (app()->runningUnitTests())`): wrap `console.error` and `console.warn`
+  to push `{ timestamp, message }` into `window.__pestBrowser.consoleLogs`, the
+  same array `assertNoConsoleLogs()` reads. That array is the plugin's internal,
+  so re-check this after a plugin upgrade, with a planted `console.warn`.
 - **A green run with zero tests is not a pass.** Make sure the project has a
   `test` script (`"test": "vitest run"` in `package.json`; `php artisan test` or
   a `test` script in `composer.json`). `npm test --if-present` with no script

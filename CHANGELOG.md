@@ -9,6 +9,15 @@ This file starts at 0.6.6. Earlier releases are recorded in the git history.
 
 ## [Unreleased]
 
+## [0.6.7] - 2026-11-06
+
+### Fixed
+- `/tdd`: the Pest browser plugin (v5.2.0) records only `console.log` and uncaught
+  errors, so `console.error` and `console.warn` pass `assertNoConsoleLogs()` and
+  `assertNoJavaScriptErrors()`. The skill now says so and shows the test-only
+  forwarder that catches them. Checked against the plugin's source; reported by a
+  consumer, PS Mapper.
+
 ## [0.6.6] - 2026-11-05
 
 ### Added
